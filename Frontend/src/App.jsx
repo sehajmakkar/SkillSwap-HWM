@@ -7,21 +7,44 @@ import Hero from "./components/Hero";
 import Pricing from "./components/Pricing";
 import Roadmap from "./components/Roadmap";
 import Services from "./components/Services";
+import Doubts from "./routes/Doubts/Doubts";
+import LandingPage from "./routes/LandingPage/LandingPage";
+import Layout from "./routes/Layout/Layout";
+import SinglePage from "./routes/SinglePage/SinglePage";
+
+import {
+  createBrowserRouter,
+  Link,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 
 const App = () => {
+  // paths
+  const appRouter = createBrowserRouter([
+    {
+      path: "/",
+      element: <Layout />,
+      children: [
+        {
+          path: "/",
+          element: <LandingPage />,
+        },
+        {
+          path: "/doubts",
+          element: <Doubts />,
+        },
+        {
+          path: "/:id",
+          element: <SinglePage />,
+        },
+      ],
+    }
+  ])
+
   return (
     <>
-      <div className="pt-[4.75rem] lg:pt-[5.25rem] overflow-hidden">
-        <Header />
-        <Hero />
-        <Benefits />
-        <Collaboration />
-        {/* <Services /> */}
-        <Pricing />
-        {/* <Roadmap /> */}
-        <Footer />
-      </div>
-
+      <RouterProvider router={appRouter} />
       <ButtonGradient />
     </>
   );
