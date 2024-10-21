@@ -1,23 +1,60 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FcGoogle } from "react-icons/fc"; // Install react-icons if not installed
+import { useFirebase } from "../../context/Firebase";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
+  const firebase = useFirebase();
+  const navigate = useNavigate();
+  
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
+  useEffect(() => {
+    if (firebase.isLoggedIn) {
+      // navigate to home page 
+      navigate("/");
+
+    }
+  }, [firebase, navigate]);
+
+  // Handle form submission for email/password sign-up
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent form from refreshing the page
+
+    try {
+      await firebase.signupUserWithEmailAndPassword(email, password);
+      setSuccess("Account created successfully!");
+      setError("");
+    } catch (err) {
+      setError(err.message);
+      setSuccess("");
+    }
+  };
+
+  // Handle Google sign-in
+  const handleGoogleSignIn = async () => {
+    try {
+      await firebase.signinWithGoogle();
+      setSuccess("Signed in with Google successfully!");
+      setError("");
+    } catch (err) {
+      setError(err.message);
+      setSuccess("");
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-n-7">
       <div className="max-w-md w-full bg-n-8 p-8 rounded shadow-lg">
         <h1 className="h1 text-center mb-6 text-color-1">Sign Up</h1>
-        <form>
-          <div className="mb-4">
-            <label className="block text-n-1 text-sm font-bold mb-2" htmlFor="username">
-              Username
-            </label>
-            <input
-              type="text"
-              id="username"
-              className="w-full px-3 py-2 border border-n-9 rounded bg-n-7 text-n-1 placeholder-n-4 focus:outline-none focus:border-color-1"
-              placeholder="Enter your username"
-            />
-          </div>
+        
+        {error && <p className="text-red-500 mb-4">{error}</p>}
+        {success && <p className="text-green-500 mb-4">{success}</p>}
+        
+        <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-n-1 text-sm font-bold mb-2" htmlFor="email">
               Email
@@ -27,8 +64,12 @@ const Signup = () => {
               id="email"
               className="w-full px-3 py-2 border border-n-9 rounded bg-n-7 text-n-1 placeholder-n-4 focus:outline-none focus:border-color-1"
               placeholder="Enter your email"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+              required
             />
           </div>
+
           <div className="mb-6">
             <label className="block text-n-1 text-sm font-bold mb-2" htmlFor="password">
               Password
@@ -38,37 +79,41 @@ const Signup = () => {
               id="password"
               className="w-full px-3 py-2 border border-n-9 rounded bg-n-7 text-n-1 placeholder-n-4 focus:outline-none focus:border-color-1"
               placeholder="Enter your password"
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+              required
             />
           </div>
+
           <div className="flex items-center justify-between mb-4">
             <button
               type="submit"
               className="button bg-color-1 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
             >
-              Sign Up
+              Create Account
             </button>
-          </div>
-
-          <div className="flex items-center justify-center mb-4">
-            <span className="text-n-4">or</span>
-          </div>
-
-          <div className="flex items-center justify-center mb-4">
-            <button
-              type="button"
-              className="flex items-center justify-center w-full py-2 px-4 border border-n-9 rounded bg-white text-n-1 hover:bg-n-6 focus:outline-none focus:border-color-1"
-            >
-              <FcGoogle className="mr-2" size={24} />
-              Sign up with Google
-            </button>
-          </div>
-
-          <div className="flex items-center justify-between">
-            <a className="inline-block align-baseline font-bold text-sm text-color-5 hover:text-color-2" href="#">
-              Already have an account? Login
-            </a>
           </div>
         </form>
+
+        <div className="flex items-center justify-center mb-4">
+          <span className="text-n-4">or</span>
+        </div>
+
+        <div className="flex items-center justify-center mb-4">
+          <button
+            onClick={handleGoogleSignIn}
+            className="flex items-center justify-center w-full py-2 px-4 border border-n-9 rounded bg-white text-n-1 hover:bg-n-6 focus:outline-none focus:border-color-1"
+          >
+            <FcGoogle className="mr-2" size={24} />
+            Sign up with Google
+          </button>
+        </div>
+
+        <div className="flex items-center justify-between">
+          <a className="inline-block align-baseline font-bold text-sm text-color-5 hover:text-color-2" href="#">
+            Already have an account? Login
+          </a>
+        </div>
       </div>
     </div>
   );
