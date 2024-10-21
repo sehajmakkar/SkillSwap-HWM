@@ -10,7 +10,9 @@ import Services from "./components/Services";
 import Doubts from "./routes/Doubts/Doubts";
 import LandingPage from "./routes/LandingPage/LandingPage";
 import Layout from "./routes/Layout/Layout";
+import Login from "./routes/Login/Login";
 import SinglePage from "./routes/SinglePage/SinglePage";
+import Signup from "./routes/Signup/Signup";
 
 import {
   createBrowserRouter,
@@ -18,6 +20,10 @@ import {
   Navigate,
   RouterProvider,
 } from "react-router-dom";
+import StudyTools from "./routes/StudyTools/StudyTools";
+import { Profile } from "./routes/Profile/Profile";
+import PricingPage from "./routes/PricingPage/PricingPage";
+import Timer from "./routes/Timer/Timer";
 
 const App = () => {
   // paths
@@ -37,6 +43,30 @@ const App = () => {
         {
           path: "/:id",
           element: <SinglePage />,
+        },
+        {
+          path: "/login",
+          element: <Login />,
+        },
+        {
+          path: "/signup",
+          element: <Signup />,
+        },
+        {
+          path: "/studytools",
+          element: <StudyTools />,
+        },
+        {
+          path: "/profile",
+          element: <Profile />,
+        },
+        {
+          path: "/pricing",
+          element: <PricingPage />,
+        },
+        {
+          path: "/timer",
+          element: <Timer />,
         },
       ],
     }
