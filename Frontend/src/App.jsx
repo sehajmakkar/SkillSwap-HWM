@@ -13,6 +13,7 @@ import Layout from "./routes/Layout/Layout";
 import Login from "./routes/Login/Login";
 import SinglePage from "./routes/SinglePage/SinglePage";
 import Signup from "./routes/Signup/Signup";
+import Rewards from "./routes/Rewards/Rewards";
 
 import {
   createBrowserRouter,
@@ -21,7 +22,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import StudyTools from "./routes/StudyTools/StudyTools";
-import { Profile } from "./routes/Profile/Profile";
+import Profile from "./routes/Profile/Profile";
 import PricingPage from "./routes/PricingPage/PricingPage";
 import Timer from "./routes/Timer/Timer";
 
@@ -41,7 +42,7 @@ const App = () => {
           element: <Doubts />,
         },
         {
-          path: "/:id",
+          path: "/doubts/:id",
           element: <SinglePage />,
         },
         {
@@ -67,6 +68,10 @@ const App = () => {
         {
           path: "/timer",
           element: <Timer />,
+        },
+        {
+          path: "/rewards",
+          element: <Rewards />,
         },
       ],
     }
