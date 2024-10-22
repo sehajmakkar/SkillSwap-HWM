@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FiThumbsUp, FiShare2, FiMessageSquare, FiVideo } from "react-icons/fi";
 
+import { useFirebase } from "../../context/Firebase";
+
 const SingleDoubtPage = () => {
+  const firebase = useFirebase();
+
   // Demo data
   const demoDoubt = {
     title: "How does React state management work?",

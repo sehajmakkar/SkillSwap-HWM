@@ -1,18 +1,29 @@
 import React, { useState } from "react";
 import { FiThumbsUp } from "react-icons/fi"; // Upvote icon
+import { useFirebase } from "../context/Firebase"; // Use Firebase context
 
-const DoubtCard = ({ title, description, author, solved }) => {
-  const [upvotes, setUpvotes] = useState(0);
+const DoubtCard = ({ id, title, description, author, solved, initialUpvotes }) => {
+  const [upvotes, setUpvotes] = useState(initialUpvotes || 0);
   const [isSolved, setIsSolved] = useState(solved);
 
+  const firebase = useFirebase();
+
   // Handle upvote click
-  const handleUpvote = () => {
-    setUpvotes(upvotes + 1);
+  const handleUpvote = async () => {
+    const newUpvoteCount = upvotes + 1;
+    setUpvotes(newUpvoteCount);
+
+    // Persist upvotes to Firebase
+    await firebase.updateDoubt(id, { upvotes: newUpvoteCount });
   };
 
   // Toggle solved/active status
-  const toggleStatus = () => {
-    setIsSolved(!isSolved);
+  const toggleStatus = async () => {
+    const newStatus = !isSolved;
+    setIsSolved(newStatus);
+
+    // Persist status change to Firebase
+    await firebase.updateDoubt(id, { solved: newStatus });
   };
 
   return (

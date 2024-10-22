@@ -40,33 +40,33 @@ export const navigation = [
   {
     id: "0",
     title: "Doubts",
-    url: "#features",
+    url: "/doubts",
   },
   {
     id: "1",
     title: "Study Tools",
-    url: "#pricing",
+    url: "/studytools",
   },
   {
     id: "2",
     title: "Pricing",
-    url: "#how-to-use",
+    url: "/pricing",
   },
   {
     id: "3",
-    title: "About Us",
-    url: "#roadmap",
+    title: "Rewards",
+    url: "/rewards",
   },
   {
     id: "4",
     title: "New account",
-    url: "#signup",
+    url: "/signup",
     onlyMobile: true,
   },
   {
     id: "5",
-    title: "Sign in",
-    url: "#login",
+    title: "Log in",
+    url: "/login",
     onlyMobile: true,
   },
 ];

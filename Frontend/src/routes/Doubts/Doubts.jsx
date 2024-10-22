@@ -1,12 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FiSearch } from "react-icons/fi"; // Search icon from react-icons
 import DoubtCard from "../../components/DoubtCard"; // Import the DoubtCard component
-import Header from "../../components/Header";
+import { useFirebase } from "../../context/Firebase";
+import { Link } from "react-router-dom";
+import SingleDoubtPage from "../SinglePage/SinglePage";
+import AddDoubt from "../AddDoubt/AddDoubt";
 
 const Doubts = () => {
+  const firebase = useFirebase();
+  const [doubts, setDoubts] = useState([]);
+
+  // Fetch doubts on component mount
+  useEffect(() => {
+    firebase.listAllDoubts().then((snapshot) => {
+      const fetchedDoubts = snapshot.docs.map(doc => ({
+        id: doc.id,   // In case you need to reference the ID later
+        ...doc.data(), // Spread the actual document data (title, description, status, etc.)
+      }));
+      setDoubts(fetchedDoubts);
+    });
+  }, [firebase]);
+
   return (
     <div className="min-h-screen bg-n-7 flex flex-col items-center p-5 pt-20">
-      {/* pt-20 ensures that content doesn't overlap with the header */}
       <div className="max-w-3xl w-full bg-n-8 p-6 rounded shadow-lg mb-10">
         {/* Search Bar */}
         <div className="flex items-center mb-6">
@@ -21,24 +37,29 @@ const Doubts = () => {
         </div>
 
         {/* Ask a Doubt Button */}
+        <Link to="/add-doubt">
         <div className="flex justify-end mb-6">
           <button className="button bg-color-2 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline">
             Ask a Doubt
           </button>
         </div>
+        </Link>
 
         {/* Doubt Cards Section */}
         <div className="grid grid-cols-1 gap-6">
-          <DoubtCard
-            title="How does React's useEffect hook work?"
-            description="I'm confused about how to use the useEffect hook in React. Can someone explain with an example?"
-            author="John Doe"
-          />
-          <DoubtCard
-            title="What is the difference between == and === in JavaScript?"
-            description="Can someone explain the difference between == and === in JavaScript? When should I use which?"
-            author="Jane Smith"
-          />
+          {doubts.length > 0 ? (
+            doubts.map((doubt) => (
+              <DoubtCard
+                key={doubt.id} // Make sure to use a unique key
+                title={doubt.title}
+                description={doubt.description}
+                author={doubt.displayname || doubt.userEmail} // Use author or email
+                status={doubt.status} // Pass status to show solved or active
+              />
+            ))
+          ) : (
+            <p className="text-center text-n-3">No doubts found</p>
+          )}
         </div>
       </div>
     </div>

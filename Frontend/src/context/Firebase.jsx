@@ -16,6 +16,7 @@ import {
   getDocs,
   getDoc,
   doc,
+  updateDoc,   // Import for updating docs
   query,
   where,
 } from "firebase/firestore";
@@ -55,11 +56,10 @@ export const FirebaseProvider = (props) => {
     onAuthStateChanged(firebaseAuth, (user) => {
       if (user) {
         setUser(user);
-      }
-      else{
+      } else {
         setUser(null);
       }
-    })
+    });
   }, []);
 
   // Signup using email and password
@@ -73,23 +73,40 @@ export const FirebaseProvider = (props) => {
   // Signin using Google
   const signinWithGoogle = () => signInWithPopup(firebaseAuth, googleProvider);
 
-  console.log(user)
+  console.log(user);
 
+  // Create a new doubt listing
   const handleCreateNewListing = async (title, description, image, tags, status) => {
-    const imageRef = ref(storage, `uploads/images/${Date.now()}-${image.name}`)
-    const uplaoadResult = await uploadBytes(imageRef, image)
+    const imageRef = ref(storage, `uploads/images/${Date.now()}-${image.name}`);
+    const uploadResult = await uploadBytes(imageRef, image);
     return await addDoc(collection(firestore, "listings"), {
       title,
       description,
-      imageURL: uplaoadResult.ref.fullPath,
+      imageURL: uploadResult.ref.fullPath,
       tags,
       status,
       userID: user.uid,
       userEmail: user.email,
       displayname: user.displayName,
-      photoURL: user.photoURL
-    })
-  }
+      photoURL: user.photoURL,
+    });
+  };
+
+  // List all doubts
+  const listAllDoubts = () => {
+    return getDocs(collection(firestore, "listings"));
+  };
+
+  // Get image URL from Firebase storage
+  const getImageURL = (path) => {
+    return getDownloadURL(ref(storage, path));
+  };
+
+  // Update a doubt (e.g., upvotes, status)
+  const updateDoubt = async (id, data) => {
+    const doubtRef = doc(firestore, "listings", id); // Reference to specific document
+    return await updateDoc(doubtRef, data);          // Update the document with new data
+  };
 
   const isLoggedIn = user ? true : false;
 
@@ -100,7 +117,10 @@ export const FirebaseProvider = (props) => {
       signinUserWithEmailAndPassword,
       signinWithGoogle,
       isLoggedIn,
-      handleCreateNewListing
+      handleCreateNewListing,
+      listAllDoubts,
+      getImageURL,
+      updateDoubt,   // Provide the update function for updating doubts
     }}>
       {props.children}
     </FirebaseContext.Provider>
