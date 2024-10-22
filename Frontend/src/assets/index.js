@@ -22,18 +22,18 @@ import loading from "./loading.png";
 import background from "./background.jpg";
 
 import curve from "./hero/curve.png";
-import robot from "./hero/robot.jpg";
+import ss from "./hero/ss.png";
 import heroBackground from "./hero/background.jpg";
 
 import curve1 from "./collaboration/curve-1.svg";
 import curve2 from "./collaboration/curve-2.svg";
 import discord from "./collaboration/discord.png";
-import figma from "./collaboration/figma.png";
-import framer from "./collaboration/framer.png";
+import zoom from "./collaboration/zoom.png";
+import tele from "./collaboration/tele.png";
 import notion from "./collaboration/notion.png";
-import photoshop from "./collaboration/photoshop.png";
-import protopie from "./collaboration/protopie.png";
-import raindrop from "./collaboration/raindrop.png";
+import whatsapp from "./collaboration/whatsapp.png";
+import googlemeet from "./collaboration/googlemeet.png";
+import skillshare from "./collaboration/skillshare.png";
 import slack from "./collaboration/slack.png";
 
 import service1 from "./services/service-1.png";
@@ -99,17 +99,17 @@ export {
   loading,
   background,
   curve,
-  robot,
+  ss,
   heroBackground,
   curve1,
   curve2,
   discord,
-  figma,
-  framer,
+  zoom,
+  tele,
   notion,
-  photoshop,
-  protopie,
-  raindrop,
+  whatsapp,
+  googlemeet,
+  skillshare,
   slack,
   service1,
   service2,
