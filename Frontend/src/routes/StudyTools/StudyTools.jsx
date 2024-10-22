@@ -20,19 +20,19 @@ const StudyTools = () => {
           Whiteboard
         </button>
         <button
-          onClick={() => navigate("/study-timer")}
+          onClick={() => navigate("/timer")}
           className="transition-transform transform hover:scale-105 hover:shadow-lg bg-color-2 text-n-8 p-6 rounded-lg"
         >
           Study Timer
         </button>
         <button
-          onClick={() => navigate("/all-chat")}
+          onClick={() => navigate("/allchat")}
           className="transition-transform transform hover:scale-105 hover:shadow-lg bg-color-3 text-n-8 p-6 rounded-lg"
         >
-          ALL Chat
+          All Chat
         </button>
         <button
-          onClick={() => navigate("/group-vcs")}
+          onClick={() => navigate("/groupvcs")}
           className="transition-transform transform hover:scale-105 hover:shadow-lg bg-color-4 text-n-8 p-6 rounded-lg"
         >
           Group VCs

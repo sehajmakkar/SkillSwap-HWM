@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useeffect } from "react";
 import { FiThumbsUp } from "react-icons/fi"; // Upvote icon
 import { useFirebase } from "../context/Firebase"; // Use Firebase context
+import { useNavigate } from "react-router-dom";
 
 const DoubtCard = ({ id, title, description, author, solved, initialUpvotes }) => {
+
+  const navigate = useNavigate();
   const [upvotes, setUpvotes] = useState(initialUpvotes || 0);
   const [isSolved, setIsSolved] = useState(solved);
 
   const firebase = useFirebase();
+
+  console.log(id);
 
   // Handle upvote click
   const handleUpvote = async () => {
@@ -29,9 +34,12 @@ const DoubtCard = ({ id, title, description, author, solved, initialUpvotes }) =
   return (
     <div className="bg-white p-5 rounded shadow-lg border border-n-9">
       {/* Doubt Status */}
-      <div className="flex justify-between items-center mb-3">
+      <div className="flex justify-between items-center mb-3 cursor-pointer">
         {/* Title */}
-        <h3 className="text-xl font-semibold text-n-1">{title}</h3>
+        <h3 
+        className="text-xl font-semibold text-n-1"
+        onClick={() => navigate(`/doubts/${id}`)}
+        >{title}</h3>
 
         {/* Solved/Active Button */}
         <button

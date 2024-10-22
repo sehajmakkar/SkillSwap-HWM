@@ -108,6 +108,11 @@ export const FirebaseProvider = (props) => {
     return await updateDoc(doubtRef, data);          // Update the document with new data
   };
 
+  const getDoubtById = async (id) => {
+    const doubtRef = doc(firestore, "listings", id); // Reference to specific document
+    return await getDoc(doubtRef);                    // Get the document data
+  };
+
   const isLoggedIn = user ? true : false;
 
   return (
@@ -120,7 +125,8 @@ export const FirebaseProvider = (props) => {
       handleCreateNewListing,
       listAllDoubts,
       getImageURL,
-      updateDoubt,   // Provide the update function for updating doubts
+      updateDoubt,
+      getDoubtById,
     }}>
       {props.children}
     </FirebaseContext.Provider>

@@ -52,6 +52,7 @@ const Doubts = () => {
               <DoubtCard
                 key={doubt.id} // Make sure to use a unique key
                 title={doubt.title}
+                {...doubt}
                 description={doubt.description}
                 author={doubt.displayname || doubt.userEmail} // Use author or email
                 status={doubt.status} // Pass status to show solved or active
