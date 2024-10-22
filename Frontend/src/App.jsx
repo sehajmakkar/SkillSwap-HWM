@@ -26,6 +26,7 @@ import Profile from "./routes/Profile/Profile";
 import PricingPage from "./routes/PricingPage/PricingPage";
 import Timer from "./routes/Timer/Timer";
 import AddDoubt from "./routes/AddDoubt/AddDoubt";
+import Whiteboard from "./routes/Whiteboard/Whiteboard";
 
 const App = () => {
   // paths
@@ -78,6 +79,10 @@ const App = () => {
           path: "/add-doubt",
           element: <AddDoubt />,
         },
+        {
+          path:"/whiteboard",
+          element:<Whiteboard />
+        }
       ],
     }
   ])
