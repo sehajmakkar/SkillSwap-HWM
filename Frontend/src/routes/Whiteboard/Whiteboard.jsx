@@ -11,7 +11,6 @@ import {
   Line,
   Rect,
   Stage,
-  Transformer,
 } from "react-konva";
 import { useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
@@ -90,8 +89,12 @@ export default function App() {
           },
         ]);
         break;
+      case ACTIONS.ERASER:
+        // Eraser functionality is handled in onPointerMove
+        break;
     }
   }
+
   function onPointerMove() {
     if (action === ACTIONS.SELECT || !isPaining.current) return;
 
@@ -152,7 +155,58 @@ export default function App() {
           })
         );
         break;
+      case ACTIONS.ERASER:
+        eraseShapes(x, y);
+        break;
     }
+  }
+
+  function eraseShapes(x, y) {
+    setRectangles((rectangles) =>
+      rectangles.filter((rect) => {
+        return !(
+          x >= rect.x &&
+          x <= rect.x + rect.width &&
+          y >= rect.y &&
+          y <= rect.y + rect.height
+        );
+      })
+    );
+
+    setCircles((circles) =>
+      circles.filter((circle) => {
+        const distance = Math.sqrt(
+          (x - circle.x) ** 2 + (y - circle.y) ** 2
+        );
+        return distance > circle.radius + 5; // 5 pixels buffer
+      })
+    );
+
+    setArrows((arrows) =>
+      arrows.filter((arrow) => {
+        const distance = Math.sqrt(
+          (x - arrow.points[0]) ** 2 + (y - arrow.points[1]) ** 2
+        );
+        return distance > 5; // Buffer distance for arrow endpoints
+      })
+    );
+
+    setScribbles((scribbles) =>
+      scribbles.filter((scribble) => {
+        return !scribble.points.some((point, index) => {
+          if (index % 2 === 0) {
+            const nextPoint = scribble.points[index + 1];
+            return (
+              x >= point - 5 &&
+              x <= point + 5 &&
+              y >= nextPoint - 5 &&
+              y <= nextPoint + 5
+            );
+          }
+          return false;
+        });
+      })
+    );
   }
 
   function onPointerUp() {
@@ -170,67 +224,57 @@ export default function App() {
   }
 
   function onClick(e) {
-    if (action !== ACTIONS.SELECT) return;
-    const target = e.currentTarget;
-    transformerRef.current.nodes([target]);
+    if (action === ACTIONS.ERASER) {
+      // Prevent default click action for the eraser
+      return;
+    }
+    if (action === ACTIONS.SELECT) {
+      const target = e.currentTarget;
+      transformerRef.current.nodes([target]);
+    }
   }
 
   return (
-    <div className="relative w-full h-screen overflow-hidden mt-20"> {/* Added mt-20 */}
+    <div className="relative w-full h-screen overflow-hidden mt-20"> 
       {/* Controls */}
       <div className="absolute top-0 z-10 w-full py-2 ">
         <div className="flex justify-center items-center gap-3 py-2 px-3 w-fit mx-auto border shadow-lg rounded-lg">
           <button
-            className={
-              action === ACTIONS.SELECT
-                ? "bg-violet-300 p-1 rounded"
-                : "p-1 hover:bg-violet-100 rounded"
-            }
+            className={action === ACTIONS.SELECT ? "bg-violet-300 p-1 rounded" : "p-1 hover:bg-violet-100 rounded"}
             onClick={() => setAction(ACTIONS.SELECT)}
           >
             <GiArrowCursor size={"2rem"} />
           </button>
           <button
-            className={
-              action === ACTIONS.RECTANGLE
-                ? "bg-violet-300 p-1 rounded"
-                : "p-1 hover:bg-violet-100 rounded"
-            }
+            className={action === ACTIONS.RECTANGLE ? "bg-violet-300 p-1 rounded" : "p-1 hover:bg-violet-100 rounded"}
             onClick={() => setAction(ACTIONS.RECTANGLE)}
           >
             <TbRectangle size={"2rem"} />
           </button>
           <button
-            className={
-              action === ACTIONS.CIRCLE
-                ? "bg-violet-300 p-1 rounded"
-                : "p-1 hover:bg-violet-100 rounded"
-            }
+            className={action === ACTIONS.CIRCLE ? "bg-violet-300 p-1 rounded" : "p-1 hover:bg-violet-100 rounded"}
             onClick={() => setAction(ACTIONS.CIRCLE)}
           >
             <FaRegCircle size={"1.5rem"} />
           </button>
           <button
-            className={
-              action === ACTIONS.ARROW
-                ? "bg-violet-300 p-1 rounded"
-                : "p-1 hover:bg-violet-100 rounded"
-            }
+            className={action === ACTIONS.ARROW ? "bg-violet-300 p-1 rounded" : "p-1 hover:bg-violet-100 rounded"}
             onClick={() => setAction(ACTIONS.ARROW)}
           >
             <FaLongArrowAltRight size={"2rem"} />
           </button>
           <button
-            className={
-              action === ACTIONS.SCRIBBLE
-                ? "bg-violet-300 p-1 rounded"
-                : "p-1 hover:bg-violet-100 rounded"
-            }
+            className={action === ACTIONS.SCRIBBLE ? "bg-violet-300 p-1 rounded" : "p-1 hover:bg-violet-100 rounded"}
             onClick={() => setAction(ACTIONS.SCRIBBLE)}
           >
             <LuPencil size={"1.5rem"} />
           </button>
-
+          <button
+            className={action === ACTIONS.ERASER ? "bg-violet-300 p-1 rounded" : "p-1 hover:bg-violet-100 rounded"}
+            onClick={() => setAction(ACTIONS.ERASER)} // New eraser button
+          >
+            <span>🗑️</span> {/* You can replace this with an icon if you want */}
+          </button>
           <button>
             <input
               className="w-6 h-6"
@@ -239,7 +283,6 @@ export default function App() {
               onChange={(e) => setFillColor(e.target.value)}
             />
           </button>
-
           <button onClick={handleExport}>
             <IoMdDownload size={"1.5rem"} />
           </button>
