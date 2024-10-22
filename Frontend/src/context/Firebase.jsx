@@ -9,6 +9,19 @@ import {
   onAuthStateChanged
 } from "firebase/auth";
 
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  getDoc,
+  doc,
+  query,
+  where,
+} from "firebase/firestore";
+
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
 // Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyA4mkD7N4P8i3CFer3GxfySYPl2IgvMoHE",
@@ -23,6 +36,8 @@ const firebaseConfig = {
 // Initialize Firebase
 const firebaseapp = initializeApp(firebaseConfig); 
 const firebaseAuth = getAuth(firebaseapp);
+const firestore = getFirestore(firebaseapp);
+const storage = getStorage(firebaseapp);
 const googleProvider = new GoogleAuthProvider();
 
 // Firebase context
@@ -58,6 +73,24 @@ export const FirebaseProvider = (props) => {
   // Signin using Google
   const signinWithGoogle = () => signInWithPopup(firebaseAuth, googleProvider);
 
+  console.log(user)
+
+  const handleCreateNewListing = async (title, description, image, tags, status) => {
+    const imageRef = ref(storage, `uploads/images/${Date.now()}-${image.name}`)
+    const uplaoadResult = await uploadBytes(imageRef, image)
+    return await addDoc(collection(firestore, "listings"), {
+      title,
+      description,
+      imageURL: uplaoadResult.ref.fullPath,
+      tags,
+      status,
+      userID: user.uid,
+      userEmail: user.email,
+      displayname: user.displayName,
+      photoURL: user.photoURL
+    })
+  }
+
   const isLoggedIn = user ? true : false;
 
   return (
@@ -66,7 +99,8 @@ export const FirebaseProvider = (props) => {
       signupUserWithEmailAndPassword,
       signinUserWithEmailAndPassword,
       signinWithGoogle,
-      isLoggedIn
+      isLoggedIn,
+      handleCreateNewListing
     }}>
       {props.children}
     </FirebaseContext.Provider>

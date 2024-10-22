@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import { useFirebase } from "../../context/Firebase";
 
 const AddDoubt = () => {
+
+  const firebase = useFirebase();
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
@@ -28,8 +32,9 @@ const AddDoubt = () => {
     setTags(tags.filter((tag) => tag !== tagToRemove));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    await firebase.handleCreateNewListing(title, description, image, tags, status);
     // Handle form submission logic here
   };
 
