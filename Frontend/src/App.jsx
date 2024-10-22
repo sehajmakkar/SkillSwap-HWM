@@ -25,6 +25,7 @@ import StudyTools from "./routes/StudyTools/StudyTools";
 import Profile from "./routes/Profile/Profile";
 import PricingPage from "./routes/PricingPage/PricingPage";
 import Timer from "./routes/Timer/Timer";
+import AddDoubt from "./routes/AddDoubt/AddDoubt";
 
 const App = () => {
   // paths
@@ -72,6 +73,10 @@ const App = () => {
         {
           path: "/rewards",
           element: <Rewards />,
+        },
+        {
+          path: "/add-doubt",
+          element: <AddDoubt />,
         },
       ],
     }
