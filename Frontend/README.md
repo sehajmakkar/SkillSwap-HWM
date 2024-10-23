@@ -466,7 +466,7 @@ export const companyLogos = [yourlogo, yourlogo, yourlogo, yourlogo, yourlogo];
 export const brainwaveServices = [
   "Photo generating",
   "Photo enhance",
-  "Seamless Integration",
+  "Siddharth",
 ];
 
 export const brainwaveServicesIcons = [
@@ -519,7 +519,7 @@ export const collabText =
 export const collabContent = [
   {
     id: "0",
-    title: "Seamless Integration",
+    title: "Siddharth",
     text: collabText,
   },
   {
@@ -594,35 +594,38 @@ export const collabApps = [
 export const pricing = [
   {
     id: "0",
-    title: "Basic",
-    description: "AI chatbot, personalized recommendations",
+    title: "Free",
+    description: "Limited query posting per month",
     price: "0",
     features: [
-      "An AI chatbot that can understand your queries",
-      "Personalized recommendations based on your preferences",
-      "Ability to explore the app and its features without any cost",
+      "20 Credit points at the begining of session",
+      "Limited number of doubts per session",
+      "Basic Profile editiing features",
     ],
   },
   {
     id: "1",
-    title: "Premium",
-    description: "Advanced AI chatbot, priority support, analytics dashboard",
-    price: "9.99",
+    title: "Monthly",
+    description: "Priority support",
+    price: "20",
     features: [
-      "An advanced AI chatbot that can understand complex queries",
-      "An analytics dashboard to track your conversations",
+      "80 credit points at the begining of session",
+      "Customizable profile features unlocked",
       "Priority support to solve issues quickly",
+      
     ],
   },
   {
     id: "2",
-    title: "Enterprise",
-    description: "Custom AI chatbot, advanced analytics, dedicated account",
-    price: null,
+    title: "Yearly",
+    description: "Dedicated account, Mentorship program",
+    price: "200",
     features: [
-      "An AI chatbot that can understand your queries",
+      "Gold membership for highest priority",
+      "Unlimited doubt posting",
       "Personalized recommendations based on your preferences",
-      "Ability to explore the app and its features without any cost",
+      "Early access to new features",
+      "SkillSwap Mentorship Program",
     ],
   },
 ];
@@ -630,16 +633,16 @@ export const pricing = [
 export const benefits = [
   {
     id: "0",
-    title: "Ask anything",
-    text: "Lets users quickly find answers to their questions without having to search through multiple sources.",
+    title: "Peer-to-Peer Learning",
+    text: "Students can learn collaboratively, exchanging knowledge and solving doubts with their peers, promoting deeper understanding",
     backgroundUrl: "assets/benefits/card-1.svg",
     iconUrl: benefitIcon1,
     imageUrl: benefitImage2,
   },
   {
     id: "1",
-    title: "Improve everyday",
-    text: "The app uses natural language processing to understand user queries and provide accurate and relevant responses.",
+    title: "Flexible Access to Help",
+    text: "Users can post doubts anytime and get assistance without needing to stick to strict schedules or formal tutoring sessions",
     backgroundUrl: "assets/benefits/card-2.svg",
     iconUrl: benefitIcon2,
     imageUrl: benefitImage2,
@@ -647,16 +650,16 @@ export const benefits = [
   },
   {
     id: "2",
-    title: "Connect everywhere",
-    text: "Connect with the AI chatbot from anywhere, on any device, making it more accessible and convenient.",
+    title: "Cost-Effective Learning",
+    text: "With free and affordable subscription plans, students can access quality learning support without the high cost of traditional tutoring",
     backgroundUrl: "assets/benefits/card-3.svg",
     iconUrl: benefitIcon3,
     imageUrl: benefitImage2,
   },
   {
     id: "3",
-    title: "Fast responding",
-    text: "Lets users quickly find answers to their questions without having to search through multiple sources.",
+    title: "Skill Development for Solvers",
+    text: "Users who answer questions gain teaching experience and sharpen their own skills by helping others, fostering a community of mutual growth",
     backgroundUrl: "assets/benefits/card-4.svg",
     iconUrl: benefitIcon4,
     imageUrl: benefitImage2,
@@ -664,16 +667,16 @@ export const benefits = [
   },
   {
     id: "4",
-    title: "Ask anything",
-    text: "Lets users quickly find answers to their questions without having to search through multiple sources.",
+    title: "Customizable Learning Paths",
+    text: "Subscribers can enjoy personalized learning experiences with features like AI-powered recommendations, custom study tools, and mentorship",
     backgroundUrl: "assets/benefits/card-5.svg",
     iconUrl: benefitIcon1,
     imageUrl: benefitImage2,
   },
   {
     id: "5",
-    title: "Improve everyday",
-    text: "The app uses natural language processing to understand user queries and provide accurate and relevant responses.",
+    title: "Community-Driven Support",
+    text: "The platform creates a community environment where learners can interact, help each other, and even build long-term academic relationships",
     backgroundUrl: "assets/benefits/card-6.svg",
     iconUrl: benefitIcon2,
     imageUrl: benefitImage2,

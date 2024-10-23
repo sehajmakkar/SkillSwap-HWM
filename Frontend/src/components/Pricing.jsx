@@ -8,7 +8,6 @@ const Pricing = () => {
   return (
     <Section className="overflow-hidden" id="pricing">
       <div className="container relative z-2">
-
         {/* <div className="hidden relative justify-center mb-[6.5rem] lg:flex">
           <img
             src={smallSphere}
@@ -30,7 +29,7 @@ const Pricing = () => {
 
         <Heading
           tag="Get started with SkillSwap"
-          title="Pay once, use forever"
+          title="Ask, Learn and Swap Knowledge."
         />
 
         <div className="relative">

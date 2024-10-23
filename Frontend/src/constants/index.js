@@ -80,7 +80,7 @@ export const companyLogos = [yourlogo, yourlogo, yourlogo, yourlogo, yourlogo];
 export const brainwaveServices = [
   "Photo generating",
   "Photo enhance",
-  "Seamless Integration",
+  "Siddharth",
 ];
 
 export const brainwaveServicesIcons = [
@@ -128,21 +128,21 @@ export const roadmap = [
 ];
 
 export const collabText =
-  "With smart automation and top-notch security, it's the perfect solution for teams looking to work smarter.";
+  "";
 
 export const collabContent = [
   {
     id: "0",
-    title: "Seamless Integration",
+    title: "Flexible Access to Help",
     text: collabText,
   },
   {
     id: "1",
-    title: "Smart Automation",
+    title: "Cost Effective Learning",
   },
   {
     id: "2",
-    title: "Top-notch Security",
+    title: "Community Driven",
   },
 ];
 
@@ -208,35 +208,37 @@ export const collabApps = [
 export const pricing = [
   {
     id: "0",
-    title: "Basic",
-    description: "AI chatbot, personalized recommendations",
+    title: "Free",
+    description: "Limited query posting per month",
     price: "0",
     features: [
-      "An AI chatbot that can understand your queries",
-      "Personalized recommendations based on your preferences",
-      "Ability to explore the app and its features without any cost",
+      "20 Credit points per month",
+      "Limited number of doubts",
+      "Basic Profile editiing features",
     ],
   },
   {
     id: "1",
-    title: "Premium",
-    description: "Advanced AI chatbot, priority support, analytics dashboard",
-    price: "9.99",
+    title: "Monthly",
+    description: "Priority support",
+    price: "20",
     features: [
-      "An advanced AI chatbot that can understand complex queries",
-      "An analytics dashboard to track your conversations",
+      "80 credit points per month",
+      "Customizable profile features unlocked",
       "Priority support to solve issues quickly",
     ],
   },
   {
     id: "2",
-    title: "Enterprise",
-    description: "Custom AI chatbot, advanced analytics, dedicated account",
-    price: null,
+    title: "Yearly",
+    description: "Dedicated account, Mentorship program",
+    price: "200",
     features: [
-      "An AI chatbot that can understand your queries",
-      "Personalized recommendations based on your preferences",
-      "Ability to explore the app and its features without any cost",
+      "Gold membership for highest priority",
+      "Unlimited doubt posting",
+      "Personalized recommendations",
+      "Early access to new features",
+      "SkillSwap Mentorship Program",
     ],
   },
 ];
@@ -244,16 +246,16 @@ export const pricing = [
 export const benefits = [
   {
     id: "0",
-    title: "Ask anything",
-    text: "Lets users quickly find answers to their questions without having to search through multiple sources.",
+    title: "Peer-to-Peer Learning",
+    text: "Students can learn collaboratively, exchanging knowledge and solving doubts with their peers, promoting deeper understanding",
     backgroundUrl: "./src/assets/benefits/card-1.svg",
     iconUrl: benefitIcon1,
     imageUrl: benefitImage2,
   },
   {
     id: "1",
-    title: "Improve everyday",
-    text: "The app uses natural language processing to understand user queries and provide accurate and relevant responses.",
+    title: "Doubt Solving",
+    text: "Users can post doubts anytime and get assistance without needing to stick to strict schedules or formal tutoring sessions",
     backgroundUrl: "./src/assets/benefits/card-2.svg",
     iconUrl: benefitIcon2,
     imageUrl: benefitImage2,
@@ -261,16 +263,16 @@ export const benefits = [
   },
   {
     id: "2",
-    title: "Connect everywhere",
-    text: "Connect with the AI chatbot from anywhere, on any device, making it more accessible and convenient.",
+    title: "Personalized Learning",
+    text: "Subscribers can enjoy personalized learning experiences with features like video call and one-to-one chat",
     backgroundUrl: "./src/assets/benefits/card-3.svg",
     iconUrl: benefitIcon3,
     imageUrl: benefitImage2,
   },
   {
     id: "3",
-    title: "Fast responding",
-    text: "Lets users quickly find answers to their questions without having to search through multiple sources.",
+    title: "Study Tools",
+    text: "Users get to enhance their learning experience through  whiteboard, timer, All-chat and Group Video calls",
     backgroundUrl: "./src/assets/benefits/card-4.svg",
     iconUrl: benefitIcon4,
     imageUrl: benefitImage2,
@@ -278,16 +280,16 @@ export const benefits = [
   },
   {
     id: "4",
-    title: "Ask anything",
-    text: "Lets users quickly find answers to their questions without having to search through multiple sources.",
+    title: "Cost Effective",
+    text: "With affordable subscriptions that are both monthly and yearly,user gets access to variety of tools at simplified costs",
     backgroundUrl: "./src/assets/benefits/card-5.svg",
     iconUrl: benefitIcon1,
     imageUrl: benefitImage2,
   },
   {
     id: "5",
-    title: "Improve everyday",
-    text: "The app uses natural language processing to understand user queries and provide accurate and relevant responses.",
+    title: "Rewards and Credits",
+    text: "Users earn credits for providing answers, which can be redeemed for various rewards",
     backgroundUrl: "./src/assets/benefits/card-6.svg",
     iconUrl: benefitIcon2,
     imageUrl: benefitImage2,
