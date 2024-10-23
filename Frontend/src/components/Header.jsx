@@ -7,8 +7,10 @@ import Button from "./Button";
 import MenuSvg from "../assets/svg/MenuSvg";
 import { HamburgerMenu } from "./design/Header";
 import { useState } from "react";
+import { useFirebase } from "../context/Firebase";  // Import the Firebase context
 
 const Header = () => {
+  const { isLoggedIn, firebaseAuth } = useFirebase();  // Access isLoggedIn and firebaseAuth
   const pathname = useLocation();
   const [openNavigation, setOpenNavigation] = useState(false);
 
@@ -27,6 +29,11 @@ const Header = () => {
 
     enablePageScroll();
     setOpenNavigation(false);
+  };
+
+  // Logout function
+  const handleLogout = () => {
+    firebaseAuth.signOut();
   };
 
   return (
@@ -67,15 +74,28 @@ const Header = () => {
           <HamburgerMenu />
         </nav>
 
-        <a
-          href="#signup"
-          className="button hidden mr-8 text-n-1/50 transition-colors hover:text-n-1 lg:block"
-        >
-          New account
-        </a>
-        <Button className="hidden lg:flex" href="#login">
-          Sign in
-        </Button>
+        {isLoggedIn ? (
+          <>
+            <Button className="hidden lg:flex mr-3" href="/profile">
+              Profile
+            </Button>
+            <Button className="hidden lg:flex" onClick={handleLogout}>
+              Logout
+            </Button>
+          </>
+        ) : (
+          <>
+            <a
+              href="/signup"
+              className="button hidden mr-8 text-n-1/50 transition-colors hover:text-n-1 lg:block"
+            >
+              New account
+            </a>
+            <Button className="hidden lg:flex" href="/login">
+              Log In
+            </Button>
+          </>
+        )}
 
         <Button
           className="ml-auto lg:hidden"
