@@ -38,6 +38,30 @@ const SingleDoubtPage = () => {
     }
   }, [data]);
 
+const [replies, setReplies] = useState([]);
+const [newReply, setNewReply] = useState('');
+
+useEffect(() => {
+  firebase.getRepliesByDoubtId(params.id).then((snapshot) => {
+    const fetchedReplies = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    setReplies(fetchedReplies);
+  });
+}, [params.id]);
+
+const handlePostReply = async () => {
+  if (newReply.trim() === '') return; // Don't allow empty replies
+
+  const replyData = {
+    message: newReply,
+    // You can include more data like images if needed
+  };
+
+  await firebase.postReplyToDoubt(params.id, replyData);
+  setNewReply(''); // Clear the input field
+};
+
+
+
   if (!data) return <p>Loading...</p>;
 
   return (
@@ -114,9 +138,35 @@ const SingleDoubtPage = () => {
         </div>
 
         <div>
-          <h4 className="text-lg font-semibold mb-3">Replies/Comments</h4>
-          {/* Comments section here */}
-        </div>
+  <h4 className="text-lg font-semibold mb-3">Comments</h4>
+  <div className="space-y-2">
+    {replies.map(reply => (
+      <div key={reply.id} className="bg-gray-100 p-3 rounded-md">
+        <strong>{reply.displayName}</strong>
+        <p>{reply.message}</p>
+        <span className="text-gray-500 text-sm">
+          {new Date(reply.timestamp?.seconds * 1000).toLocaleTimeString()}
+        </span>
+      </div>
+    ))}
+  </div>
+
+  <div className="mt-4">
+    <textarea
+      value={newReply}
+      onChange={(e) => setNewReply(e.target.value)}
+      className="border border-gray-300 rounded-md w-full p-2 bg-white "
+      placeholder="Write your reply..."
+    />
+    <button
+      onClick={handlePostReply}
+      className="bg-blue-500 text-white px-4 py-2 mt-2 rounded-md"
+    >
+      Reply
+    </button>
+  </div>
+</div>
+
       </div>
     </div>
   );

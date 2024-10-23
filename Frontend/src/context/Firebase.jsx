@@ -115,6 +115,25 @@ export const FirebaseProvider = (props) => {
     return await getDoc(doubtRef);                    // Get the document data
   };
 
+  // Fetch replies for a specific doubt
+const getRepliesByDoubtId = async (doubtId) => {
+  const repliesRef = collection(firestore, `listings/${doubtId}/replies`);
+  return await getDocs(repliesRef);
+};
+
+// Post a reply to a specific doubt
+const postReplyToDoubt = async (doubtId, replyData) => {
+  const repliesRef = collection(firestore, `listings/${doubtId}/replies`);
+  return await addDoc(repliesRef, {
+    ...replyData,
+    timestamp: new Date(),
+    userId: user.uid,
+    displayName: user.displayName || user.email,
+  });
+};
+
+
+
   const isLoggedIn = user ? true : false;
 
   return (
@@ -130,6 +149,8 @@ export const FirebaseProvider = (props) => {
       getImageURL,
       updateDoubt,
       getDoubtById,
+      getRepliesByDoubtId,  // Add this
+      postReplyToDoubt,      // Add this
     }}>
       {props.children}
     </FirebaseContext.Provider>
