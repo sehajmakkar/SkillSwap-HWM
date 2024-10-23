@@ -132,6 +132,19 @@ const postReplyToDoubt = async (doubtId, replyData) => {
   });
 };
 
+// Fetch user data by user ID
+const getUserData = async (userId) => {
+  const userRef = doc(firestore, "users", userId); // Assuming user data is stored in a "users" collection
+  const userSnap = await getDoc(userRef);
+  return userSnap.exists() ? userSnap.data() : null;
+};
+
+// Update user profile data
+const updateUserData = async (userId, data) => {
+  const userRef = doc(firestore, "users", userId); // Reference to the user document
+  return await updateDoc(userRef, data); // Update the document with new data
+};
+
 
 
   const isLoggedIn = user ? true : false;
@@ -151,6 +164,8 @@ const postReplyToDoubt = async (doubtId, replyData) => {
       getDoubtById,
       getRepliesByDoubtId,  // Add this
       postReplyToDoubt,      // Add this
+      getUserData, // Add this
+      updateUserData, // Add this
     }}>
       {props.children}
     </FirebaseContext.Provider>

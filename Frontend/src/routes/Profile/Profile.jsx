@@ -1,21 +1,24 @@
 import React from "react";
 import Chat from "../../components/Chat";
+import { useFirebase } from "../../context/Firebase";
+import { useEffect, useState } from "react";
 
 const ProfilePage = () => {
+
+  const firebase = useFirebase();
+
   // Demo data for the user and their doubts
   const user = {
     username: "John Doe",
     email: "john.doe@example.com",
     credits: 120,
     subscription: "Pro Member",
-    profileImage: "https://images.pexels.com/photos/270366/pexels-photo-270366.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Profile image URL
+    profileImage: "https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?t=st=1729702539~exp=1729706139~hmac=49ca03e949d079b6b122215892645483224b98000c4a2723665bfd79a7fe157f&w=740", // Profile image URL
   };
 
   const doubts = [
     { title: "How does React state management work?", status: "Active" },
     { title: "What's the best way to learn Tailwind?", status: "Solved" },
-    { title: "How to optimize a React app for performance?", status: "Active" },
-    { title: "How to optimize a React app for performance?", status: "Active" },
     { title: "How to optimize a React app for performance?", status: "Active" },
   ];
 
