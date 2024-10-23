@@ -221,7 +221,7 @@ export const pricing = [
     id: "1",
     title: "Monthly",
     description: "Priority support",
-    price: "20",
+    price: "499",
     features: [
       "80 credit points per month",
       "Customizable profile features unlocked",
@@ -232,7 +232,7 @@ export const pricing = [
     id: "2",
     title: "Yearly",
     description: "Dedicated account, Mentorship program",
-    price: "200",
+    price: "4999",
     features: [
       "Gold membership for highest priority",
       "Unlimited doubt posting",

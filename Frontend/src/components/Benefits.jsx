@@ -11,7 +11,7 @@ const Benefits = () => {
       <div className="container relative z-2">
         <Heading
           className="whitespace-nowrap lg:max-w-2x1"
-          title="Ask,Learn and Swap Knowledge"
+          title="Ask, Learn and Swap Knowledge"
         />
 
         <div className="flex flex-wrap gap-10 mb-10">
