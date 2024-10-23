@@ -27,6 +27,7 @@ import PricingPage from "./routes/PricingPage/PricingPage";
 import Timer from "./routes/Timer/Timer";
 import AddDoubt from "./routes/AddDoubt/AddDoubt";
 import Whiteboard from "./routes/Whiteboard/Whiteboard";
+import AllChat from "./routes/AllChat/AllChat";
 
 const App = () => {
   // paths
@@ -82,7 +83,11 @@ const App = () => {
         {
           path:"/whiteboard",
           element:<Whiteboard />
-        }
+        },
+        {
+          path:"/allchat",
+          element:<AllChat />
+        },
       ],
     }
   ])

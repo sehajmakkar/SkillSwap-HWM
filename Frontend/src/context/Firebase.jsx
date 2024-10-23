@@ -19,6 +19,8 @@ import {
   updateDoc,   // Import for updating docs
   query,
   where,
+  orderBy,
+  onSnapshot,
 } from "firebase/firestore";
 
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -118,6 +120,7 @@ export const FirebaseProvider = (props) => {
   return (
     <FirebaseContext.Provider value={{
       firebaseAuth,
+      firestore,
       signupUserWithEmailAndPassword,
       signinUserWithEmailAndPassword,
       signinWithGoogle,
