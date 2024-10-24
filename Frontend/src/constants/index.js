@@ -220,7 +220,7 @@ export const pricing = [
   {
     id: "1",
     title: "Monthly",
-    description: "Priority support",
+    description: "Value for money",
     price: "499",
     features: [
       "80 credit points per month",

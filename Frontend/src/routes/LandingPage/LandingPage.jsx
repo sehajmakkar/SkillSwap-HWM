@@ -9,16 +9,16 @@ import Pricing from '../../components/Pricing'
 
 const LandingPage = () => {
   return (
-    <div className="pt-[4.75rem] lg:pt-[5.25rem] overflow-hidden">
-        <Header />
-        <Hero />
-        <Benefits />
-        <Collaboration />
-        {/* <Services /> */}
-        <Pricing />
-        {/* <Roadmap /> */}
-        <Footer />
-      </div>
+    <div className="pt-[4.75rem] lg:pt-[5.25rem] overflow-hidden bg-white-purple-gradient">
+      <Header />
+      <Hero />
+      <Benefits />
+      <Collaboration />
+      {/* <Services /> */}
+      <Pricing />
+      {/* <Roadmap /> */}
+      <Footer />
+    </div>
   )
 }
 
