@@ -1,5 +1,4 @@
 import React from "react";
-import Chat from "../../components/Chat";
 import { useFirebase } from "../../context/Firebase";
 import { useEffect, useState } from "react";
 
@@ -23,10 +22,10 @@ const ProfilePage = () => {
   ];
 
   return (
-    <div className="flex mt-20 p-5 space-x-10">
-      {/* Left Section: User Info & Doubts */}
-      <div className="w-1/3">
-        {/* User Info */}
+    <div className="flex flex-col lg:flex-row mt-20 p-5 space-y-10 lg:space-y-0 lg:space-x-10">
+      
+      {/* Left Section: User Info */}
+      <div className="w-full lg:w-1/3">
         <div className="bg-white p-5 rounded shadow-lg border border-n-9 mb-6">
           <div className="flex flex-col items-center">
             {/* Profile Image */}
@@ -46,8 +45,17 @@ const ProfilePage = () => {
           </div>
         </div>
 
-        {/* My Doubts */}
-        <div className="bg-white p-5 rounded shadow-lg border border-n-9 mb-6">
+        {/* Chat Button */}
+        <div className="flex justify-center">
+          <button className="bg-color-1 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            Chat 
+          </button>
+        </div>
+      </div>
+
+      {/* Right Section: My Doubts */}
+      <div className="w-full lg:w-2/3">
+        <div className="bg-white p-5 rounded shadow-lg border border-n-9">
           <h2 className="text-2xl font-semibold mb-4">My Doubts</h2>
           <div className="space-y-4">
             {doubts.map((doubt, index) => (
@@ -62,11 +70,6 @@ const ProfilePage = () => {
         </div>
       </div>
 
-      {/* Right Section: You can add more content here if needed */}
-      <div className="w-2/3 bg-white p-5 rounded shadow-lg border border-n-9">
-        <h2 className="text-2xl font-semibold mb-4">Chat</h2>
-        <Chat />
-      </div>
     </div>
   );
 };
