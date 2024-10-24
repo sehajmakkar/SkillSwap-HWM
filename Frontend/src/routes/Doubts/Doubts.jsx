@@ -13,8 +13,8 @@ const Doubts = () => {
   // Fetch doubts on component mount
   useEffect(() => {
     firebase.listAllDoubts().then((snapshot) => {
-      const fetchedDoubts = snapshot.docs.map(doc => ({
-        id: doc.id,   // In case you need to reference the ID later
+      const fetchedDoubts = snapshot.docs.map((doc) => ({
+        id: doc.id, // In case you need to reference the ID later
         ...doc.data(), // Spread the actual document data (title, description, status, etc.)
       }));
       setDoubts(fetchedDoubts);
@@ -22,7 +22,7 @@ const Doubts = () => {
   }, [firebase]);
 
   return (
-    <div className="min-h-screen bg-n-7 flex flex-col items-center p-5 pt-20">
+    <div className="min-h-screen bg-white-purple-gradient flex flex-col items-center p-5 pt-20">
       <div className="max-w-3xl w-full bg-n-8 p-6 rounded shadow-lg mb-10">
         {/* Search Bar */}
         <div className="flex items-center mb-6">
@@ -38,11 +38,11 @@ const Doubts = () => {
 
         {/* Ask a Doubt Button */}
         <Link to="/add-doubt">
-        <div className="flex justify-end mb-6">
-          <button className="button bg-color-2 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-            Ask a Doubt
-          </button>
-        </div>
+          <div className="flex justify-end mb-6">
+            <button className="button bg-color-2 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+              Ask a Doubt
+            </button>
+          </div>
         </Link>
 
         {/* Doubt Cards Section */}
