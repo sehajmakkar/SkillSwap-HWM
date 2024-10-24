@@ -28,6 +28,9 @@ import Timer from "./routes/Timer/Timer";
 import AddDoubt from "./routes/AddDoubt/AddDoubt";
 import Whiteboard from "./routes/Whiteboard/Whiteboard";
 import AllChat from "./routes/AllChat/AllChat";
+import ChatPage from "./routes/ChatPage/ChatPage";
+import VideoCall from "./routes/VideoCall/VideoCall";
+import Lobby from "./routes/VideoCall/Lobby";
 
 const App = () => {
   // paths
@@ -87,6 +90,18 @@ const App = () => {
         {
           path:"/allchat",
           element:<AllChat />
+        },
+        {
+          path:"/chat",
+          element:<ChatPage/>
+        },
+        {
+          path:"/videocall",
+          element:<VideoCall/>
+        },
+        {
+          path:"/lobby",
+          element:<Lobby/>
         },
       ],
     }

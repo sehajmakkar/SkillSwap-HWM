@@ -150,8 +150,10 @@ const SingleDoubtPage = () => {
               <FiMessageSquare className="mr-2" /> Chat with Author
             </button>
 
-            <button className="flex items-center bg-color-3 text-white px-3 py-2 rounded">
-              <FiVideo className="mr-2" /> 1-to-1 Zoom Call
+            <button 
+            className="flex items-center bg-color-3 text-white px-3 py-2 rounded" href="/videocall"
+            >
+              <FiVideo className="mr-2" /> 1-to-1 Video Call
             </button>
           </div>
         </div>
