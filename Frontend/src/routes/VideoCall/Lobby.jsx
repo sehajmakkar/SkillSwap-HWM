@@ -19,7 +19,7 @@ const Lobby = () => {
         <input
           type="text"
           placeholder="Enter Room Code"
-          className="w-full p-2 border border-gray-300 rounded mb-4"
+          className="w-full p-2 border border-gray-300 rounded mb-4 bg-white"
           value={inviteCode}
           onChange={(e) => setInviteCode(e.target.value)}
           required

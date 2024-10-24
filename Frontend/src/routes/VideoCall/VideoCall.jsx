@@ -1,17 +1,24 @@
 import React, { useEffect, useRef, useState } from 'react';
 import AgoraRTC from 'agora-rtc-sdk-ng';
+import { FaMicrophone, FaMicrophoneSlash, FaVideo, FaVideoSlash, FaPhoneSlash } from 'react-icons/fa';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const VideoCall = () => {
   const [isJoined, setIsJoined] = useState(false);
   const [isMutedAudio, setIsMutedAudio] = useState(false);
   const [isMutedVideo, setIsMutedVideo] = useState(false);
-
+  const navigate = useNavigate(); // Hook to navigate to another route
+  const location = useLocation(); // Hook to access the current URL
+  
   const client = useRef(null);
   const localTracks = useRef({ videoTrack: null, audioTrack: null });
   const remoteTracks = useRef({ videoTrack: null, audioTrack: null });
   const APP_ID = '8f0d738c06c741d3853b291bcbe3a63a'; // Replace with your Agora App ID
   const TOKEN = null; // Token if needed
-  const CHANNEL = 'test'; // Dynamic or fixed channel
+
+  // Extract the room code from the URL
+  const queryParams = new URLSearchParams(location.search);
+  const CHANNEL = queryParams.get('room') || 'default-room'; // If no room is provided, default to 'default-room'
 
   // Video elements for local and remote users
   const localVideoRef = useRef(null);
@@ -22,7 +29,7 @@ const VideoCall = () => {
       client.current = AgoraRTC.createClient({ mode: 'rtc', codec: 'vp8' });
 
       try {
-        // Join the channel
+        // Join the channel using the dynamic room code
         await client.current.join(APP_ID, CHANNEL, TOKEN, null);
 
         // Create local tracks for video and audio
@@ -65,13 +72,14 @@ const VideoCall = () => {
       if (localTracks.current.audioTrack) localTracks.current.audioTrack.close();
       if (client.current) client.current.leave();
     };
-  }, []);
+  }, [CHANNEL]);
 
   const handleLeave = async () => {
     if (localTracks.current.videoTrack) localTracks.current.videoTrack.close();
     if (localTracks.current.audioTrack) localTracks.current.audioTrack.close();
     await client.current.leave();
     setIsJoined(false);
+    navigate('/lobby'); // Navigate to the lobby after leaving
   };
 
   const toggleAudio = () => {
@@ -95,21 +103,39 @@ const VideoCall = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <div id="videos" className="flex space-x-4">
-        <div className="w-64 h-48 bg-black" ref={localVideoRef}></div>
-        <div className="w-64 h-48 bg-black" ref={remoteVideoRef}></div>
+    <div className="relative h-screen bg-gradient-to-r from-white to-purple-200 flex items-center justify-center">
+      {/* Video Grid */}
+      <div id="videos" className="grid grid-cols-2 w-full h-full">
+        {/* Local Video */}
+        <video ref={localVideoRef} className="video-player w-full h-full object-cover"></video>
+        {/* Remote Video */}
+        <video ref={remoteVideoRef} className="video-player w-full h-full object-cover"></video>
       </div>
 
-      <div className="flex space-x-4 mt-4">
-        <button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={toggleAudio}>
-          {isMutedAudio ? 'Unmute Audio' : 'Mute Audio'}
+      {/* Controls */}
+      <div id="controls" className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-6">
+        {/* Toggle Camera */}
+        <button
+          className="control-container bg-purple-500 p-4 rounded-full text-white hover:bg-purple-700 transition"
+          onClick={toggleVideo}
+        >
+          {isMutedVideo ? <FaVideoSlash size={24} /> : <FaVideo size={24} />}
         </button>
-        <button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={toggleVideo}>
-          {isMutedVideo ? 'Unmute Video' : 'Mute Video'}
+
+        {/* Toggle Microphone */}
+        <button
+          className="control-container bg-purple-500 p-4 rounded-full text-white hover:bg-purple-700 transition"
+          onClick={toggleAudio}
+        >
+          {isMutedAudio ? <FaMicrophoneSlash size={24} /> : <FaMicrophone size={24} />}
         </button>
-        <button className="bg-red-500 text-white px-4 py-2 rounded" onClick={handleLeave}>
-          Leave Call
+
+        {/* Leave Button */}
+        <button
+          className="control-container bg-red-500 p-4 rounded-full text-white hover:bg-red-700 transition"
+          onClick={handleLeave}
+        >
+          <FaPhoneSlash size={24} />
         </button>
       </div>
     </div>
