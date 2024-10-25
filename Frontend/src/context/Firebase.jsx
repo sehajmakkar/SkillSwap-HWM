@@ -145,8 +145,6 @@ const updateUserData = async (userId, data) => {
   return await updateDoc(userRef, data); // Update the document with new data
 };
 
-
-
   const isLoggedIn = user ? true : false;
 
   return (

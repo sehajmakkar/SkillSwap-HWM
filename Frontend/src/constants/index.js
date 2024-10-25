@@ -221,9 +221,9 @@ export const pricing = [
     id: "1",
     title: "Monthly",
     description: "Value for money",
-    price: "499",
+    price: "99",
     features: [
-      "80 credit points per month",
+      "Unlimited doubt posting",
       "Customizable profile features unlocked",
       "Priority support to solve issues quickly",
     ],
@@ -232,7 +232,7 @@ export const pricing = [
     id: "2",
     title: "Yearly",
     description: "Dedicated account, Mentorship program",
-    price: "4999",
+    price: "999",
     features: [
       "Gold membership for highest priority",
       "Unlimited doubt posting",

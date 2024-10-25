@@ -146,15 +146,19 @@ const SingleDoubtPage = () => {
               <FiShare2 className="mr-2" /> Share
             </button>
 
+                <Link to="/chat">
             <button className="flex items-center bg-color-2 text-white px-3 py-2 rounded">
               <FiMessageSquare className="mr-2" /> Chat with Author
             </button>
+            </Link>
 
+            <Link to="/lobby">
             <button 
-            className="flex items-center bg-color-3 text-white px-3 py-2 rounded" href="/videocall"
+            className="flex items-center bg-color-3 text-white px-3 py-2 rounded"
             >
               <FiVideo className="mr-2" /> 1-to-1 Video Call
             </button>
+            </Link>
           </div>
         </div>
 
