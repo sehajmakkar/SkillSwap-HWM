@@ -27,13 +27,13 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 // Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyA4mkD7N4P8i3CFer3GxfySYPl2IgvMoHE",
-  authDomain: "skillswap-007.firebaseapp.com",
-  projectId: "skillswap-007",
-  storageBucket: "skillswap-007.appspot.com",
-  messagingSenderId: "35156699369",
-  appId: "1:35156699369:web:b1b289af381ae7cba12878",
-  measurementId: "G-VW7S1PL02X"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
 // Initialize Firebase
